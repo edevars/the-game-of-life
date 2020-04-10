@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { GridWrapper } from "../styles/GridWrapper";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import { Title } from "../styles/Title";
 import { Subtitle } from "../styles/Subtitle";
@@ -14,7 +15,7 @@ const BorderBox = styled.div`
   align-items: center;
 `;
 
-const Grid = styled.div`
+const Board = styled.div`
   display: grid;
   grid-template-columns: repeat(${BOARD_SIZE}, 10px);
   grid-template-rows: repeat(${BOARD_SIZE}, 10px);
@@ -23,7 +24,7 @@ const Grid = styled.div`
   row-gap: 1px;
 `;
 
-const Block = styled.div`
+const Cell = styled.div`
   background: ${(props) => (props.isAlive ? "#00ff1d" : "black")};
   width: 10px;
   height: 10px;
@@ -349,7 +350,7 @@ const liveOrDieByType = (type, index, boardOfCells) => {
 const createCells = () => {
   let cells = [NUMBER_OF_CELLS];
   for (let i = 0; i < NUMBER_OF_CELLS; i++) {
-    const isAlive = Math.random() > 0.5 ? true : false;
+    const isAlive = Math.random() > 0.8 ? true : false;
     cells[i] = {
       isAlive,
       index: i,
@@ -395,16 +396,39 @@ const Home = () => {
   return (
     <div>
       <GlobalStyle />
-      <BorderBox>
-        <Title>El juego de la vida</Title>
-        <Subtitle>de John Horton Conway</Subtitle>
-        <Grid>
-          {cells.map(({ isAlive, index }) => (
-            <Block key={index} isAlive={isAlive} />
-          ))}
-        </Grid>
-        <h3>No. de generación {generation}</h3>
-      </BorderBox>
+      <GridWrapper>
+        <BorderBox>
+          <Title>El juego de la vida</Title>
+          <Subtitle>de John Horton Conway</Subtitle>
+          <Board>
+            {cells.map(({ isAlive, index }) => (
+              <Cell key={index} isAlive={isAlive} />
+            ))}
+          </Board>
+          <h3>No. de generación {generation}</h3>
+        </BorderBox>
+        <aside>
+          <h3>Descripción</h3>
+          <p>
+            El juego de la vida es un autómata celular diseñado por el
+            matemático británico John Horton Conway en 1970. Se lleva a cabo en
+            un tablero cuadrado de n x n. Este tablero es de 50 x 50 celulas, en
+            total alberga a 2500 celulas.
+          </p>
+          <h3>Las reglas</h3>
+          <ul>
+            <li>Este juego no necesita jugadores.</li>
+            <li>
+              Una célula muerta con exactamente 3 células vecinas vivas "nace"
+              (es decir, al turno siguiente estará viva).
+            </li>
+            <li>
+              Una célula viva con 2 o 3 células vecinas vivas sigue viva, en
+              otro caso muere (por "soledad" o "superpoblación").
+            </li>
+          </ul>
+        </aside>
+      </GridWrapper>
     </div>
   );
 };
