@@ -1,11 +1,13 @@
 {
-  "name": "GameLife",
+  "name": "GameOfLife",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Enrique Devars <enrique.devars@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "next -p 5555"
+    "dev": "next -p 5555",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
     "next": "^9.3.4",
