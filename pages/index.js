@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { GlobalStyle } from "../styles/GlobalStyle";
+import { Title } from "../styles/Title";
+import { Subtitle } from "../styles/Subtitle";
 
 const BOARD_SIZE = 50;
 const NUMBER_OF_CELLS = BOARD_SIZE * BOARD_SIZE;
 
 const BorderBox = styled.div`
-  display: inline-block;
-  border: 50px solid blue;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Grid = styled.div`
@@ -360,7 +365,7 @@ const createNewGeneration = (boardOfCells) => {
   for (let i = 0; i < NUMBER_OF_CELLS; i++) {
     let type = boardOfCells[i].type;
     newBoardOfCells[i] = {
-      isAlive: liveOrDieByType(type,i, boardOfCells),
+      isAlive: liveOrDieByType(type, i, boardOfCells),
       index: i,
       type,
     };
@@ -374,14 +379,14 @@ const Home = () => {
   const [generation, setGeneration] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => setTime(Date.now()), 50);
+    const interval = setInterval(() => setTime(Date.now()), 100);
     if (generation === 0) {
       setCells(createCells());
     } else {
       setCells(createNewGeneration(cells));
     }
     setGeneration(generation + 1);
-  
+
     return () => {
       clearInterval(interval);
     };
@@ -389,13 +394,16 @@ const Home = () => {
 
   return (
     <div>
-      <h1>No. de generación {generation}</h1>
+      <GlobalStyle />
       <BorderBox>
+        <Title>El juego de la vida</Title>
+        <Subtitle>de John Horton Conway</Subtitle>
         <Grid>
           {cells.map(({ isAlive, index }) => (
             <Block key={index} isAlive={isAlive} />
           ))}
         </Grid>
+        <h3>No. de generación {generation}</h3>
       </BorderBox>
     </div>
   );
