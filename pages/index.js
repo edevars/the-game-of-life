@@ -4,9 +4,15 @@ import { GridWrapper } from "../styles/GridWrapper";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import { Title } from "../styles/Title";
 import { Subtitle } from "../styles/Subtitle";
+import { Footer } from "../styles/Footer";
 
 const BOARD_SIZE = 50;
 const NUMBER_OF_CELLS = BOARD_SIZE * BOARD_SIZE;
+
+const MainWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const BorderBox = styled.div`
   display: flex;
@@ -394,7 +400,7 @@ const Home = () => {
   }, [time]);
 
   return (
-    <div>
+    <MainWrapper>
       <GlobalStyle />
       <GridWrapper>
         <BorderBox>
@@ -429,7 +435,8 @@ const Home = () => {
           </ul>
         </aside>
       </GridWrapper>
-    </div>
+      <Footer />
+    </MainWrapper>
   );
 };
 
