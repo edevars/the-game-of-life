@@ -412,8 +412,8 @@ const Home = () => {
           <p>
             El juego de la vida es un autómata celular diseñado por el
             matemático británico John Horton Conway en 1970. Se lleva a cabo en
-            un tablero cuadrado de n x n. Este tablero es de 50 x 50 celulas, en
-            total alberga a 2500 celulas.
+            un tablero de m filas por n columnas. Este tablero es de 50 x 50
+            celulas con un total de 2500 celulas.
           </p>
           <h3>Las reglas</h3>
           <ul>
